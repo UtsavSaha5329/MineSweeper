@@ -1,0 +1,59 @@
+import java.util.*;
+class MineSweeper
+{
+    public static void main()
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Enter rows/columns of array:");
+        int size=sc.nextInt();
+        char mines[][]=new char[size][size];
+        for(int i=0;i<size;i++)
+        {
+            Arrays.fill(mines[i],'0');
+        }
+        while(true)
+        {
+            System.out.print("Enter row no. and column no. of mine:");
+            int row=sc.nextInt();
+            int col=sc.nextInt();
+            mines[row][col]='*';
+            System.out.print("More mines?(yes/no)");
+            String ch=sc.next();
+            if(ch.strip().toLowerCase().equals("yes")){continue;}
+            else{break;}
+        }
+        for(int i=0;i<size;i++){
+        for(int j=0;j<size;j++){
+        int c=0;
+        if(mines[i][j]=='*'){continue;}
+        for(int dr=-1;dr<=1;dr++)
+        {
+            for(int dc=-1;dc<=1;dc++)
+            {
+                int nrow=i+dr;int ncol=j+dc;
+                if(nrow<0 || nrow>=size || ncol<0 || ncol>=size)
+                {
+                    continue;
+                }
+                if(dr==0 && dc==0)
+                {
+                    continue;
+                }
+                if(mines[nrow][ncol]=='*')
+                {
+                    c+=1;
+                }
+            }
+        }
+        mines[i][j]=(char)(c+'0');
+        }}
+        for(int i=0;i<size;i++)
+        {
+            for(int j=0;j<size;j++)
+            {
+                System.out.print(mines[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+}
